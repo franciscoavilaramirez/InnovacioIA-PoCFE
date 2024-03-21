@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="container__wrapper">
+      <div class="container__wrapper__buttons-header">
+      <button mat-fab color="warn" aria-label="Example icon button with a home icon">
+        <mat-icon>home</mat-icon>
+      </button>
+      <mat-form-field>
+        <mat-label>Elige una opción</mat-label>
+        <mat-select [value]="selectedOption" (selectionChange)="onSelectionChange($event.value)">
+          <mat-option>{{''}}</mat-option>
+          <mat-option *ngFor="let poc of pocs" [value]="poc.value">{{poc.viewValue}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      </div>
+        <div class="container__wrapper__content">
+          <div class="archivo">
+            <h2>ARCHIVO</h2>
+            <input type="file" class="input-file" (change)="onFileChange($event)" accept=".pdf" required>
+          </div>
+          <div class="procesar">
+            <button mat-raised-button color="primary"(click)="uploadFileToServer()" >Procesar documento</button>
+          </div>
+
+        </div>
+  </div>
+</div>

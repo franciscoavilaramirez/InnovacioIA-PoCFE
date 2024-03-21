@@ -1,0 +1,24 @@
+.container{
+  //height:150%;
+  //width: 94%;
+  //height: 90%;
+  display: flex;
+  padding: 20px 20px 0px 20px;
+  flex-direction: column;
+
+  .button{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 15px;
+
+  }
+
+  &__wrapper{
+    display: flex;
+    height: 100%;
+    //padding: 50px, 50px, 0px, 50px;
+    flex-direction: column;
+  }
+
+}

@@ -1,0 +1,7 @@
+{
+  "/api": {
+    "target": "https://container-app-gene-poc1.salmonriver-c4d5c0f1.francecentral.azurecontainerapps.io/",
+    "secure": false,
+    "changeOrigin": true
+  }
+}

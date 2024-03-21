@@ -1,0 +1,83 @@
+<div class="container">
+  <div class="container__wrapper">
+    <div class="container__wrapper__buttons-header">
+    <button mat-fab color="warn" aria-label="Example icon button with a home icon">
+      <mat-icon>home</mat-icon>
+    </button>
+    <mat-form-field>
+      <mat-label>Elige una opción</mat-label>
+      <mat-select [value]="selectedOption"  (selectionChange)="onSelectionChange($event.value)">
+        <mat-option  >{{''}}</mat-option>
+        <mat-option  *ngFor="let poc of pocs" [value]="poc.value">{{poc.viewValue}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    </div>
+
+    <div class="container__wrapper__content">
+      <div class="bocadillo-derecha">
+        <!-- <p>{{message}}{{message}}{{message}}{{message}}{{message}}</p> -->
+        <p>{{message}}</p>
+
+
+      </div>
+      <div class="user">
+        <img src="../../assets/perm_identity.png" alt="">
+      </div>
+      <!-- <div class = "div" >
+        <button mat-raised-button (click)="openDocDialog()" >open dialog</button>
+      </div> -->
+      <!-- AÑADE LAS REFERENCIAS AL FINAL DEL TEXTO PRINCIPAL Y LAS HACE CLICABLES -->
+
+          <!-- 1 -->
+      <!-- <div class="bocadillo-izq">
+        <p>
+          {{responseMessage?.result?.answer}}
+        </p>
+        <div *ngFor="let referencia of referenciasEncontradas">
+          <button mat-button (click)="accionReferencia(referencia)">{{referencia}}</button>
+        </div>
+      </div> -->
+      <!-- <div class="bocadillo-izq">
+        <ng-container *ngFor="let segmento of referenciasEncontradas">
+          <ng-container *ngIf="segmento.tipo === 'texto'">
+            <p>{{ segmento.contenido }}</p>
+          </ng-container>
+          <ng-container *ngIf="segmento.tipo === 'referencia'">
+            <button mat-button (click)="accionReferencia(segmento.contenido)">
+              {{ segmento.contenido }}
+            </button>
+          </ng-container>
+        </ng-container>
+      </div> -->
+      <div class="bocadillo-izq">
+        <ng-container *ngFor="let segmentosParrafo of referenciasEncontradas">
+    <p>
+      <ng-container *ngFor="let segmento of segmentosParrafo">
+        <ng-container *ngIf="segmento.tipo === 'texto'">{{ segmento.contenido }}</ng-container>
+        <ng-container *ngIf="segmento.tipo === 'referencia'">
+          <button mat-icon-button (click)="openDocDialog(segmento.contenido)">
+            {{ segmento.contenido }}
+          </button>
+        </ng-container>
+      </ng-container>
+    </p>
+  </ng-container>
+      </div>
+
+      <div class="bot">
+        <img src="../../assets/satisfied.png" alt="">
+      </div>
+
+
+      <div class="message">
+        <img src="../../assets/satisfied.png" alt="">
+        <input matInput type="text" style="width: 90%;border-radius: 5px;height: 30px;" >
+
+        <button mat-icon-button (click)="processMessage(responseMessage)">
+         <img src = "../../assets/play_arrow.png" alt="">
+        </button>
+
+      </div>
+    </div>
+  </div>
+</div>
