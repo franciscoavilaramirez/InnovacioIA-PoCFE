@@ -35,6 +35,23 @@
         height: 78%;
         border-left: 2px dashed black;
       }
+      .tipo{
+        display: flex;
+        //flex-direction: column;
+        width: 60%;
+        align-items: stretch;
+        /* height: 43%; */
+        justify-content: space-between;
+        padding: 20px 0px 0px 20px;
+      }
+      .desplegable{
+        display: flex;
+        width: 99%;
+        align-items: stretch;
+        justify-content: space-between;
+        padding: 20px 0px 0px 20px;
+        flex-direction: column;
+      }
       .archivo{
         display: flex;
         flex-direction: column;
@@ -43,7 +60,7 @@
         height: 50%;
         justify-content: center;
         /* margin-left: 20px; */
-        padding: 20px 0px 20px 20px;
+        padding: 20px 0px 0px 20px;
       }
       .procesar{
         display: flex;
@@ -66,4 +83,11 @@
     background-color: #E20074;
     border-radius: 10px;
   }
+}
+.mat-form-field {
+  display: inline-block;
+  position: relative;
+  text-align: left;
+  width: 20%;
+  height: 40%;
 }

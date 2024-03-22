@@ -15,40 +15,13 @@
 
     <div class="container__wrapper__content">
       <div class="bocadillo-derecha">
-        <!-- <p>{{message}}{{message}}{{message}}{{message}}{{message}}</p> -->
         <p>{{message}}</p>
-
-
       </div>
       <div class="user">
-        <img src="../../assets/perm_identity.png" alt="">
+        <img src="../../assets/empleados.png" alt="" style="width: 40px; height: 40px;">
       </div>
-      <!-- <div class = "div" >
-        <button mat-raised-button (click)="openDocDialog()" >open dialog</button>
-      </div> -->
-      <!-- AÑADE LAS REFERENCIAS AL FINAL DEL TEXTO PRINCIPAL Y LAS HACE CLICABLES -->
 
-          <!-- 1 -->
-      <!-- <div class="bocadillo-izq">
-        <p>
-          {{responseMessage?.result?.answer}}
-        </p>
-        <div *ngFor="let referencia of referenciasEncontradas">
-          <button mat-button (click)="accionReferencia(referencia)">{{referencia}}</button>
-        </div>
-      </div> -->
-      <!-- <div class="bocadillo-izq">
-        <ng-container *ngFor="let segmento of referenciasEncontradas">
-          <ng-container *ngIf="segmento.tipo === 'texto'">
-            <p>{{ segmento.contenido }}</p>
-          </ng-container>
-          <ng-container *ngIf="segmento.tipo === 'referencia'">
-            <button mat-button (click)="accionReferencia(segmento.contenido)">
-              {{ segmento.contenido }}
-            </button>
-          </ng-container>
-        </ng-container>
-      </div> -->
+      <!-- AÑADE LAS REFERENCIAS AL FINAL DEL TEXTO PRINCIPAL Y LAS HACE CLICABLES -->
       <div class="bocadillo-izq">
         <ng-container *ngFor="let segmentosParrafo of referenciasEncontradas">
     <p>
@@ -63,20 +36,15 @@
     </p>
   </ng-container>
       </div>
-
       <div class="bot">
-        <img src="../../assets/satisfied.png" alt="">
+        <img src="../../assets/robotica.png" alt="" style="width: 40px; height: 40px;">
       </div>
-
-
       <div class="message">
         <img src="../../assets/satisfied.png" alt="">
         <input matInput type="text" style="width: 90%;border-radius: 5px;height: 30px;" >
-
         <button mat-icon-button (click)="processMessage(responseMessage)">
-         <img src = "../../assets/play_arrow.png" alt="">
+         <img src = "../../assets/arrow-green.png" alt="" style="width: 40px; height: 40px;">
         </button>
-
       </div>
     </div>
   </div>

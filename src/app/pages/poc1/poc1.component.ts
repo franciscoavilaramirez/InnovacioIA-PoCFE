@@ -77,13 +77,7 @@ export class Poc1Component implements OnInit {
       this.referenciasTextos['[doc3]'] = this.responseMessage.result.citations[2].content;
       this.filepath['[doc3]'] = this.responseMessage.result.citations[2].filepath;
 
-
-
     }
-    console.log('contenido referencia doc1',this.referenciasTextos)
-    // Si hay más referencias, puedes asignarlas de manera similar
-    // this.referenciasTextos['[doc2]'] = this.responseMessage.result.citations[1];
-    // Y así sucesivamente para más referencias
   }
 }
  buscarReferenciasDocumentos(texto: string) {
@@ -92,34 +86,6 @@ export class Poc1Component implements OnInit {
   return coincidencias || [];
 }
 
-// buscarReferencias(): void {
-//   this.referenciasEncontradas = this.buscarReferenciasDocumentos(this.responseMessage.result.answer);
-//   console.log('Referencias encontradas:', this.referenciasEncontradas);
-
-        //1
-// }
-// buscarReferencias(): void {
-//   const texto = this.responseMessage.result.answer;
-//   const patron = /\[doc\d\]/g;
-//   let lastIndex = 0;
-//   let match: RegExpExecArray | null;
-//   this.referenciasEncontradas = [];
-
-//   while ((match = patron.exec(texto)) !== null) {
-//     const referencia = match[0];
-//     const indiceInicio = match.index;
-//     const indiceFin = patron.lastIndex;
-//     const textoAnterior = texto.substring(lastIndex, indiceInicio);
-//     this.referenciasEncontradas.push({ tipo: 'texto', contenido: textoAnterior });
-//     this.referenciasEncontradas.push({ tipo: 'referencia', contenido: referencia });
-//     lastIndex = indiceFin;
-//   }
-
-//   const textoRestante = texto.substring(lastIndex);
-//   this.referenciasEncontradas.push({ tipo: 'texto', contenido: textoRestante });
-
-//   console.log('Referencias encontradas:', this.referenciasEncontradas);
-// }
 buscarReferencias(): void {
   const texto = this.responseMessage.result.answer;
   const patronParrafos = /\n\n+/; // Este es solo un ejemplo de patrón para separar párrafos por saltos de línea
@@ -163,8 +129,6 @@ buscarReferencias(): void {
 
   console.log('Referencias encontradas:', this.referenciasEncontradas);
 }
-
-
 
 openDocDialog(referencia: string) {
   let textoAsociado = this.referenciasTextos[referencia];

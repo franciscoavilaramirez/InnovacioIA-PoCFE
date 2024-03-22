@@ -14,6 +14,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { PopoverComponent } from './componentes/popover/popover.component';
 import { DocDialogComponent } from './componentes/doc-dialog/doc-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatIconModule,
     MatSelectModule,
     MatTooltipModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

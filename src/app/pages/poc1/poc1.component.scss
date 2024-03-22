@@ -1,7 +1,7 @@
 .container{
   //height:150%;
   width: 94%;
-  height: 90%;
+  //height: 90%;
   display: flex;
   padding:30px;
   flex-direction: column;
@@ -22,7 +22,7 @@
       border: 1px solid black;
       margin-top: 15px;
       flex-direction: column;
-      //height: 90%;
+      height: 100%;
 
       .bocadillo-derecha {
         position: relative;
@@ -89,10 +89,9 @@
       .message{
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        //height: 35%;
-        margin: 30px 10px;
         justify-content: space-evenly;
+        margin: 10px 0px 0px 10px;
+        padding-bottom: 10px;
       }
     }
 
@@ -104,15 +103,28 @@
     text-align: left;
     width: 20%;
     height: 40%;
-}
-.mat-fab.mat-warn, .mat-mini-fab.mat-warn {
-  background-color: #E20074;
-  border-radius: 10px;
-}
+  }
+
+  .mat-fab.mat-warn, .mat-mini-fab.mat-warn {
+    background-color: #E20074;
+    border-radius: 10px;
+  }
 }
 
 .clickable {
   cursor: pointer !important;
   text-decoration: underline !important;
   color: blue !important;
+}
+.mat-icon-button{
+  padding: 0;
+  min-width: 0;
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+  line-height: 40px;
+  border-radius: 50%;
+  color: blue !important;
+  /* display: flex; */
+  /* margin-right: 15px;*/
 }

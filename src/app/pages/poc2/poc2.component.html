@@ -13,12 +13,27 @@
       </mat-form-field>
       </div>
         <div class="container__wrapper__content">
+          <div class="tipo">
+            <h2>TIPO</h2>
+            <h2>RESULTADO</h2>
+          </div>
+          <div class="desplegable">
+            <mat-form-field>
+              <mat-label>Selecciona una opción</mat-label>
+              <mat-select [value]="selectedTipo" (selectionChange)="onSelectionTipo($event.value)" >
+                <mat-option>Ninguna</mat-option>
+                <mat-option  *ngFor="let tipo of tipos" [value]="tipo.value">{{tipo.viewValue}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <p>You selected: {{selectedTipo}}</p>
+
+          </div>
           <div class="archivo">
             <h2>ARCHIVO</h2>
-            <input type="file" class="input-file" (change)="onFileChange($event)" accept=".pdf" required>
+            <input type="file" class="input-file" multiple (change)="onFileChange($event)" accept=".pdf" required>
           </div>
           <div class="procesar">
-            <button mat-raised-button color="primary"(click)="uploadFileToServer()" >Procesar documento</button>
+            <button mat-raised-button color="primary"(change)="uploadFileToServer($event)">Procesar documento</button>
           </div>
 
         </div>

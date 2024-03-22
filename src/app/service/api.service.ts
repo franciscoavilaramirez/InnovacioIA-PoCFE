@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Message } from '../model/message';
-import { Observable } from 'rxjs';
+import { Observable, observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -34,13 +34,18 @@ export class ApiService {
     return this.http.post<string>(this.apiUrl + '/process_message', request);
 
   }
-  uploadFile(file: File) {
-    const formData = new FormData();
-    formData.append('file', file);
-    console.log('hola desde api service')
+  // uploadFile(file: File) {
+  //   const formData = new FormData();
+  //   formData.append('file', file);
+  //   console.log('hola desde api service')
 
-    // Cambia la URL por la URL de tu servidor
-    return this.http.post<any>('url_para_subir_archivo', formData);
+  //   // Cambia la URL por la URL de tu servidor
+  //   return this.http.post<any>('url_para_subir_archivo', formData);
+  // }
+  // OTRA POSIBLE SOLUCION
+
+  uploadFile(formData:FormData) : Observable<any>{
+    return this.http.post<FormData>('url dle backend', formData);
   }
 
 }

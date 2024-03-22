@@ -16,8 +16,8 @@ export class DocDialogComponent implements OnInit {
   ngOnInit(): void {
 console.log('DATOS QUE VIENEN RESPONSEmESSAGE data.texto', this.data.texto);
 
-    console.log('DATOS QUE VIENEN RESPONSEmESSAGE data', this.data);
-    this.textoAsociado = JSON.stringify(this.data.texto);
+    //console.log('DATOS QUE VIENEN RESPONSEmESSAGE data', this.data);
+    //this.textoAsociado = JSON.stringify(this.data.texto);
     //console.log('Texto asociado:', this.textoAsociado);
   }
 

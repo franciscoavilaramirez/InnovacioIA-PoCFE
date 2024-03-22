@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/service/api.service';
 
@@ -8,13 +9,14 @@ import { ApiService } from 'src/app/service/api.service';
   styleUrls: ['./poc2.component.scss']
 })
 export class Poc2Component implements OnInit {
+  selectedTipo: any;
 
-  selectedFile: File | null = null;
+  selectedFile: FormData | null = null;
   selectedOption: any;
 
 
 
-  constructor(private router: Router, private apiService: ApiService) {
+  constructor(private router: Router, private apiService: ApiService,private _snackBar: MatSnackBar) {
     this.selectedOption = this.pocs[0].value;
 
   }
@@ -35,6 +37,18 @@ export class Poc2Component implements OnInit {
       this.router.navigate(['/poc1']);
     }
   }
+  tipos = [
+    {value: 'resolucion', viewValue: 'Resolución'},
+    {value: 'demanda', viewValue: 'Demanda'},
+
+  ];
+  onSelectionTipo(selectedValue: string) {
+    this.selectedTipo = selectedValue;
+    console.log('Valor selectedTipo:', selectedValue);
+    // if(selectedValue == "resolucion"){
+    //   console.log('soy resolucion:', selectedValue);
+    // }
+  }
   // onFileChange(event: any) {
   //   const file = event.target.files[0];
   //   if (file) {
@@ -53,14 +67,21 @@ export class Poc2Component implements OnInit {
   this.selectedFile = event.target.files[0];
     if (this.selectedFile) {
       console.log('Archivo seleccionado:', this.selectedFile);
+    }else{
+      this._snackBar.open('No se ha seleccionado ningún archivo', 'Cerrar', {
+        duration: 4000
+      });
     }
   }
 
-  uploadFileToServer() {
-    if (this.selectedFile) {
-      this.apiService.uploadFile(this.selectedFile).subscribe(
+  uploadFileToServer(event:any) {
+    const file = event.target.files[0];
+    if (file) {
+      const formData = new FormData()
+      formData.append('file',file)
+      this.apiService.uploadFile(formData).subscribe(
         response => {
-          console.log('Archivo subido exitosamente:', response);
+          console.log('response:', response);
           // Aquí puedes manejar la respuesta del servidor, como mostrar un mensaje de éxito
         },
         error => {
@@ -69,8 +90,10 @@ export class Poc2Component implements OnInit {
         }
       );
     } else {
-      console.error('No se ha seleccionado ningún archivo.');
-      // Aquí puedes mostrar un mensaje de error al usuario indicando que debe seleccionar un archivo antes de procesar.
+
+        this._snackBar.open('No se ha seleccionado ningún archivo', 'Cerrar', {
+          duration: 4000
+        });
     }
   }
 }
