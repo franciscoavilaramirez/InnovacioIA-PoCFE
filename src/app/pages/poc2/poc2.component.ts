@@ -15,7 +15,7 @@ export class Poc2Component implements OnInit {
   jsonResponse: any;
   responseMessage: any = {};
   formData = new FormData();
-
+hiddenResponse = false;
   constructor(private router: Router, private apiService: ApiService,private _snackBar: MatSnackBar) {
     this.selectedOption = this.pocs[0].value;
 
@@ -84,8 +84,13 @@ export class Poc2Component implements OnInit {
     if(this.selectedTipo === 'resolucion'){
       this.formData.append('tipo',this.selectedTipo);
      this.apiService.processMessageResolucion(this.formData).subscribe(response => {
-      this.responseMessage = response;
+      if(this.responseMessage){
+        this.responseMessage = response;
         console.log('HAS SELECCIONADO RESOLUCION',this.responseMessage);
+        this.hiddenResponse = true
+      }
+
+
      });
     }else{
       console.log('HAS SELECCIONADO DEMANDA');

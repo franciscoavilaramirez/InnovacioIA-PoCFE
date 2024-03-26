@@ -26,23 +26,25 @@
               </mat-select>
             </mat-form-field>
             <!-- <p>You selected: {{selectedTipo}}</p> -->
-            <div class="textoDerecha">
-              <pre>RESPUESTA JSON:{{ responseMessage | json }}</pre>
+            <!-- <div class="textoDerecha" *ngIf="hiddenResponse" >
+              <p>holaaaa</p>
+              <p>{{ responseMessage | json }}</p>
+            </div> -->
+            <div class="textoDerecha"*ngIf="hiddenResponse">
+              <mat-form-field class="example-full-width">
+                <mat-label>Datos de respuesta</mat-label>
+                <textarea matInput disabled style="width: 660px;height: 242px; resize: none;" >{{ responseMessage | json }}</textarea>
+              </mat-form-field>
             </div>
-
           </div>
           <div class="archivo">
             <div class="elegirArchivo">
               <h2>ARCHIVO</h2>
               <input type="file" class="input-file" multiple (change)="onFileChange($event)" accept=".pdf" required>
             </div>
-            <div class="textoDerecha">
-
-            </div>
           </div>
           <div class="procesar">
-            <button mat-raised-button color="primary"(click)="prueba()" >jsonPrueba </button>
-            <button mat-raised-button color="primary" (click)="processMessageResolucion(responseMessage)" >Procesar Documento</button>
+            <button mat-raised-button color="primary"[disabled]="!selectedTipo" (click)="processMessageResolucion(responseMessage)" >Procesar Documento</button>
             <!-- <p>{{jsonResponse.articulo}}</p> -->
           </div>
 
