@@ -10,11 +10,11 @@ import { ApiService } from 'src/app/service/api.service';
 })
 export class Poc2Component implements OnInit {
   selectedTipo: any;
-
-  selectedFile: FormData | null = null;
+  selectedFile: File | undefined;
   selectedOption: any;
-
-
+  jsonResponse: any;
+  responseMessage: any = {};
+  formData = new FormData();
 
   constructor(private router: Router, private apiService: ApiService,private _snackBar: MatSnackBar) {
     this.selectedOption = this.pocs[0].value;
@@ -49,23 +49,11 @@ export class Poc2Component implements OnInit {
     //   console.log('soy resolucion:', selectedValue);
     // }
   }
-  // onFileChange(event: any) {
-  //   const file = event.target.files[0];
-  //   if (file) {
-  //     console.log('Archivo seleccionado:', file);
-  //     // Aquí puedes agregar el código para procesar el archivo, como enviarlo a un servicio para subirlo al servidor
-  //   }
-  // }
-  // onFileChange(event: any) {
-  //   const file = event.target.files[0];
-  //   if (file) {
-  //     console.log('Archivo seleccionado:', file);
-  //     this.uploadFileToServer(file);
-  //   }
-  // }
   onFileChange(event: any) {
   this.selectedFile = event.target.files[0];
+
     if (this.selectedFile) {
+      this.convertToBlob(this.selectedFile);
       console.log('Archivo seleccionado:', this.selectedFile);
     }else{
       this._snackBar.open('No se ha seleccionado ningún archivo', 'Cerrar', {
@@ -73,27 +61,104 @@ export class Poc2Component implements OnInit {
       });
     }
   }
+  convertToBlob(file: File) {
+    const fileReader = new FileReader();
 
-  uploadFileToServer(event:any) {
-    const file = event.target.files[0];
-    if (file) {
-      const formData = new FormData()
-      formData.append('file',file)
-      this.apiService.uploadFile(formData).subscribe(
-        response => {
-          console.log('response:', response);
-          // Aquí puedes manejar la respuesta del servidor, como mostrar un mensaje de éxito
-        },
-        error => {
-          console.error('Error al subir el archivo:', error);
-          // Aquí puedes manejar el error, como mostrar un mensaje de error al usuario
-        }
-      );
-    } else {
+    fileReader.onload = (e: any) => {
+      const arrayBuffer = e.target.result;
+      const blob = new Blob([arrayBuffer], { type: file.type });
+      this.handleBlob(blob);
+    };
 
-        this._snackBar.open('No se ha seleccionado ningún archivo', 'Cerrar', {
-          duration: 4000
-        });
-    }
+    fileReader.readAsArrayBuffer(file);
   }
+
+  handleBlob(blob: Blob) {
+    // Aquí puedes utilizar el objeto Blob como desees
+    this.formData.append('archivo',blob);
+    console.log(blob);
+  }
+
+  processMessageResolucion(message: string){
+
+    if(this.selectedTipo === 'resolucion'){
+      this.formData.append('tipo',this.selectedTipo);
+     this.apiService.processMessageResolucion(this.formData).subscribe(response => {
+      this.responseMessage = response;
+        console.log('HAS SELECCIONADO RESOLUCION',this.responseMessage);
+     });
+    }else{
+      console.log('HAS SELECCIONADO DEMANDA');
+
+    }
+    (    error: any) => {
+      console.error('Error al recibir los datos:', error);
+    }
+   }
+   prueba(){
+    this.jsonResponse = this.json;
+    console.log(this.jsonResponse);
+
+   }
+    json =
+   {
+    "articulo": [
+      "173.2",
+      "153.2",
+      "153.3",
+      "148.3"
+    ],
+    "naturaleza_delito": "malos tratos habituales en el ámbito familiar, lesiones en el ámbito familiar, lesiones",
+    "demarcacion": "Granollers",
+    "reincidencia": "no",
+    "pena": [
+      {
+        "nombre": "María Inés",
+        "delitos": [
+          {
+            "delito": "malos tratos habituales en el ámbito familiar",
+            "prision": {
+              "años": 0,
+              "meses": 3
+            },
+            "multa": "<null>",
+            "perdida_beneficios_publicos": {
+              "años": 0,
+              "meses": 3
+            }
+          },
+          {
+            "delito": "lesiones en el ámbito familiar",
+            "prision": {
+              "años": 0,
+              "meses": 4
+            },
+            "multa": "<null>",
+            "perdida_beneficios_publicos": {
+              "años": 0,
+              "meses": 4
+            }
+          },
+          {
+            "delito": "lesiones",
+            "prision": {
+              "años": 0,
+              "meses": 6
+            },
+            "multa": "<null>",
+            "perdida_beneficios_publicos": {
+              "años": 0,
+              "meses": 6
+            }
+          }
+        ],
+        "responsabilidad_civil": "<null>",
+        "pagos_ordenados": "<null>"
+      }
+    ],
+    "recurso": "no",
+    "tipo_sentencia": "condenatoria",
+    "costos_procesales": "parte demandada"
+  }
+
 }

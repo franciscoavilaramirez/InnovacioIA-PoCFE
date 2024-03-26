@@ -9,21 +9,9 @@ import { Observable, observable } from 'rxjs';
 export class ApiService {
 
   apiUrl = 'https://container-app-gene-poc1.salmonriver-c4d5c0f1.francecentral.azurecontainerapps.io'
-
-  // private _options = {
-  //   headers: new HttpHeaders(
-  //     {
-  //       'Content-Type': 'application/json',
-  //       'Access-Control-Allow-Origin': '*',
-  //       'Access-Control-Allow-Methods': 'GET, POST, PATCH, DELETE, PUT, OPTIONS',
-  //     })
-  // };
-
+  apiUrlPoc2 = 'https://container-app-gene-poc2.salmonriver-c4d5c0f1.francecentral.azurecontainerapps.io'
 
   constructor(private http:HttpClient) { }
-
-  //apiUrl = 'http://localhost:4200/api'
-
 
 
   processMessage(message: string): Observable<string> {
@@ -34,18 +22,22 @@ export class ApiService {
     return this.http.post<string>(this.apiUrl + '/process_message', request);
 
   }
-  // uploadFile(file: File) {
-  //   const formData = new FormData();
-  //   formData.append('file', file);
-  //   console.log('hola desde api service')
+  private _options = {
+      headers: new HttpHeaders(
+    {
+      'Content-Type': 'multipart/form-data','accept':'aplication/json',
+      //'Access-Control-Allow-Origin': '*',
+     // 'Access-Control-Allow-Headers':'Content-Type,Access-Control-Allow-Headers,Authorization,X-Requested-With'
+    })
+  }
 
-  //   // Cambia la URL por la URL de tu servidor
-  //   return this.http.post<any>('url_para_subir_archivo', formData);
-  // }
-  // OTRA POSIBLE SOLUCION
+  processMessageResolucion(formData: FormData): Observable<any> {
+    //const myheaders = new HttpHeaders().append('Content-Type', 'multipart/form-data')
 
-  uploadFile(formData:FormData) : Observable<any>{
-    return this.http.post<FormData>('url dle backend', formData);
+
+    // return this.http.post<string>(this.apiUrl + '/process_message', request,this._options);
+    return this.http.post<any>(this.apiUrlPoc2 + '/process_message', formData);
+
   }
 
 }
