@@ -30,10 +30,10 @@
               <p>holaaaa</p>
               <p>{{ responseMessage | json }}</p>
             </div> -->
-            <div class="textoDerecha"*ngIf="hiddenResponse">
-              <mat-form-field class="example-full-width">
+            <div class="textoDerecha">
+              <mat-form-field class="mi-text-area" *ngIf="hiddenResponse" >
                 <mat-label>Datos de respuesta</mat-label>
-                <textarea matInput disabled style="width: 660px;height: 242px; resize: none;" >{{ responseMessage | json }}</textarea>
+                <textarea matInput disabled style="height: 360px; resize: none;" >{{ responseMessage | json }}</textarea>
               </mat-form-field>
             </div>
           </div>
@@ -44,8 +44,7 @@
             </div>
           </div>
           <div class="procesar">
-            <button mat-raised-button color="primary"[disabled]="!selectedTipo" (click)="processMessageResolucion(responseMessage)" >Procesar Documento</button>
-            <!-- <p>{{jsonResponse.articulo}}</p> -->
+            <button mat-raised-button color="primary"[disabled]="!(selectedTipo && selectedFile)" (click)="processMessageResolucion(responseMessage)" >Procesar Documento</button>
           </div>
 
         </div>

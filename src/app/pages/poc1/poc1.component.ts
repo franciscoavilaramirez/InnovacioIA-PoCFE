@@ -16,9 +16,7 @@ export class Poc1Component implements OnInit {
 
   message:string = '¿Puedes darme algún ejemplo de base jurídica utilizada en las resoluciones de delitos leves de hurto?'
   selectedOption: any;
-  //jsonData: any = responseData.responseData.result.answer;
   referencias: string[] = ['[doc1]', '[doc2]', '[doc3]'];
-  //referenciasConTextos: any = []
   responseMessage: any = {};
   referenciasEncontradas: any = []
   referenciasTextos: { [key: string]: string } = {
@@ -55,7 +53,6 @@ export class Poc1Component implements OnInit {
     }
   }
 	processMessage(message: string){
-  //Llamada a apiService
    this.apiService.processMessage(this.message).subscribe(response => {
     this.responseMessage = response;
     this.asignarTextosAReferencias();
@@ -127,14 +124,14 @@ buscarReferencias(): void {
     this.referenciasEncontradas.push(segmentosParrafo);
   }
 
-  console.log('Referencias encontradas:', this.referenciasEncontradas);
+  //console.log('Referencias encontradas:', this.referenciasEncontradas);
 }
 
 openDocDialog(referencia: string) {
   let textoAsociado = this.referenciasTextos[referencia];
   let filepath = this.filepath[referencia]
 
-console.log('texto asociado',textoAsociado)
+  //console.log('texto asociado',textoAsociado)
   const dialog = this.dialog.open(DocDialogComponent, {
     width: '70vw',
     height: '85vh',
@@ -148,10 +145,10 @@ console.log('texto asociado',textoAsociado)
     dialog.afterClosed().subscribe( result => {
   });
 }
-accionReferencia(referencia: string): void {
-  console.log('Se hizo clic en la referencia:', referencia);
-  // Aquí puedes agregar la lógica para realizar alguna acción con la referencia
-}
+// accionReferencia(referencia: string): void {
+//   console.log('Se hizo clic en la referencia:', referencia);
+//   // Aquí puedes agregar la lógica para realizar alguna acción con la referencia
+// }
 
 
 }

@@ -94,6 +94,14 @@
         justify-content: space-evenly;
         margin: 10px 0px 0px 10px;
         padding-bottom: 10px;
+
+        .mi-input{
+          display: inline-block;
+          position: relative;
+          text-align: left;
+          width: 27%;
+          height: 40%;
+        }
       }
     }
 
