@@ -18,10 +18,12 @@ export class Poc2Component implements OnInit {
   hiddenResponse = false;
 
   constructor(private router: Router, private apiService: ApiService,private _snackBar: MatSnackBar) {
-    this.selectedOption = this.pocs[0].value;
+    //this.selectedOption = this.pocs[0].value;
   }
 
   ngOnInit(): void {
+    this.selectedOption = 'poc2';
+    this.apiService.setSelectedOption(this.selectedOption);
   }
 
   pocs = [
@@ -29,25 +31,30 @@ export class Poc2Component implements OnInit {
     {value: 'poc2', viewValue: 'PoC 2: Análisis de documentos'},
 
   ];
+  // onSelectionChange(selectedValue: string) {
+  //   this.selectedOption = selectedValue;
+  //   console.log('Valor seleccionado:', this.selectedOption);
+  //   if(this.selectedOption == "poc1"){
+  //     //console.log('soy poc1111111111111')
+  //     this.router.navigate(['/poc1']);
+  //   }
+  // }
   onSelectionChange(selectedValue: string) {
-    this.selectedOption = selectedValue;
-    console.log('Valor seleccionado:', selectedValue);
-    if(selectedValue == "poc1"){
-      //console.log('soy poc1111111111111')
+    if (selectedValue === 'poc1') {
       this.router.navigate(['/poc1']);
     }
   }
+
   tipos = [
+    {value: 'ninguna', viewValue: 'Ninguna'},
     {value: 'resolucion', viewValue: 'Resolución'},
     {value: 'demanda', viewValue: 'Demanda'},
 
   ];
   onSelectionTipo(selectedValue: string) {
     this.selectedTipo = selectedValue;
-    console.log('Valor selectedTipo:', selectedValue);
-    // if(selectedValue == "resolucion"){
-    //   console.log('soy resolucion:', selectedValue);
-    // }
+    console.log('Valor selectedTipo:', this.selectedTipo);
+
   }
   onFileChange(event: any) {
     this.selectedFile = event.target.files[0];
@@ -56,7 +63,7 @@ export class Poc2Component implements OnInit {
         this.convertToBlob(this.selectedFile);
         //console.log('Archivo seleccionado:', this.selectedFile);
       }else{
-        this._snackBar.open('No se ha seleccionado ningún archivo', 'Cerrar', {
+        this._snackBar.open('No se ha seleccionado ningún documento', 'Cerrar', {
           duration: 4000
         });
       }
@@ -89,16 +96,12 @@ export class Poc2Component implements OnInit {
         //console.log('HAS SELECCIONADO RESOLUCION',this.responseMessage);
         this.hiddenResponse = true
       }
-
-
      });
     }else{
       //console.log('HAS SELECCIONADO DEMANDA');
-
     }
     (    error: any) => {
       console.error('Error al recibir los datos:', error);
     }
    }
-
 }

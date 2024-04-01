@@ -21,21 +21,18 @@
             <mat-form-field class="mi-form-field" >
               <mat-label>Selecciona una opción</mat-label>
               <mat-select [value]="selectedTipo" (selectionChange)="onSelectionTipo($event.value)" >
-                <mat-option>Ninguna</mat-option>
-                <mat-option  *ngFor="let tipo of tipos" [value]="tipo.value">{{tipo.viewValue}}</mat-option>
+                <mat-option *ngFor="let tipo of tipos" [value]="tipo.value">{{tipo.viewValue}}</mat-option>
               </mat-select>
             </mat-form-field>
-            <!-- <p>You selected: {{selectedTipo}}</p> -->
-            <!-- <div class="textoDerecha" *ngIf="hiddenResponse" >
-              <p>holaaaa</p>
-              <p>{{ responseMessage | json }}</p>
-            </div> -->
             <div class="textoDerecha">
               <mat-form-field class="mi-text-area" *ngIf="hiddenResponse" >
                 <mat-label>Datos de respuesta</mat-label>
                 <textarea matInput disabled style="height: 360px; resize: none;" >{{ responseMessage | json }}</textarea>
               </mat-form-field>
             </div>
+          </div>
+          <div class="error" *ngIf="selectedTipo == 'ninguna'" >
+            <mat-error>Para continuar selecciona una opción</mat-error>
           </div>
           <div class="archivo">
             <div class="elegirArchivo">
@@ -44,9 +41,8 @@
             </div>
           </div>
           <div class="procesar">
-            <button mat-raised-button color="primary"[disabled]="!(selectedTipo && selectedFile)" (click)="processMessageResolucion(responseMessage)" >Procesar Documento</button>
+            <button mat-raised-button color="primary"[disabled]="!(selectedTipo !== 'ninguna' && selectedFile)" (click)="processMessageResolucion(responseMessage)" >Procesar Documento</button>
           </div>
-
         </div>
   </div>
 </div>

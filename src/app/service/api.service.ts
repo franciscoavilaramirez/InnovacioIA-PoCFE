@@ -1,12 +1,15 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Message } from '../model/message';
-import { Observable, observable } from 'rxjs';
+import { BehaviorSubject, Observable, observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
+
+  private selectedOptionSubject = new BehaviorSubject<string>('poc1');
+  selectedOption$ = this.selectedOptionSubject.asObservable();
 
   apiUrl = 'https://container-app-gene-poc1.salmonriver-c4d5c0f1.francecentral.azurecontainerapps.io'
   apiUrlPoc2 = 'https://container-app-gene-poc2.salmonriver-c4d5c0f1.francecentral.azurecontainerapps.io'
@@ -14,6 +17,9 @@ export class ApiService {
   constructor(private http:HttpClient) { }
 
 
+  setSelectedOption(option: string) {
+    this.selectedOptionSubject.next(option);
+  }
   processMessage(message: string): Observable<string> {
     const request = {
       message:message

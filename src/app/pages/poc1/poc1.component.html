@@ -7,7 +7,7 @@
     <mat-form-field style="height: 15px;">
       <mat-label>Elige una opción</mat-label>
       <mat-select [value]="selectedOption"  (selectionChange)="onSelectionChange($event.value)">
-        <mat-option  >{{''}}</mat-option>
+        <mat-option>{{''}}</mat-option>
         <mat-option  *ngFor="let poc of pocs" [value]="poc.value">{{poc.viewValue}}</mat-option>
       </mat-select>
     </mat-form-field>
@@ -37,10 +37,10 @@
   </ng-container>
       </div>
       <div class="bot">
-        <img src="../../assets/robotica.png" alt="" style="width: 40px; height: 40px;">
+        <img src="../../assets/robotica.png" style="width: 40px; height: 40px;">
       </div>
       <div class="message">
-        <img src="../../assets/satisfied.png" alt="">
+        <img src="../../assets/cara-feliz.png" style="width: 3%;" >
         <input  type="text" style="width: 90%;border-radius: 5px;height: 30px;" >
         <button mat-icon-button (click)="processMessage(responseMessage)">
          <img src = "../../assets/arrow-green.png" alt="" style="width: 40px; height: 40px;">
