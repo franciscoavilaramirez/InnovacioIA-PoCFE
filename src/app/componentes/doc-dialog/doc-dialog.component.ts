@@ -17,14 +17,8 @@ export class DocDialogComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<Poc1Component>,@Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
-console.log('DATOS QUE VIENEN RESPONSEmESSAGE data.texto', this.data.texto);
-
-    //console.log('DATOS QUE VIENEN RESPONSEmESSAGE data', this.data);
-    //this.textoAsociado = JSON.stringify(this.data.texto);
-    //console.log('Texto asociado:', this.textoAsociado);
+    //console.log('DATOS QUE VIENEN RESPONSEmESSAGE data.texto', this.data.texto);
   }
-
-
 
   closedModal(): void {
     this.dialogRef.close();

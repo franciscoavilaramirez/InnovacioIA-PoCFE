@@ -14,9 +14,9 @@ describe('DocDialogComponent', () => {
       declarations: [ DocDialogComponent ],
       imports: [MatDialogModule],
       providers: [
-        // Aquí proporcionamos un stub para MatDialogRef
-        { provide: MatDialogRef, useValue: MatDialogRef },
-        // Si tu componente utiliza MAT_DIALOG_DATA, también necesitarás proporcionar un valor para ello
+        // Proporcionar un stub para MatDialogRef con el método close
+        { provide: MatDialogRef, useValue: { close: () => {} } },
+        // Proporcionar un valor de prueba para MAT_DIALOG_DATA
         { provide: MAT_DIALOG_DATA, useValue: {} }
       ]
     })
@@ -32,4 +32,15 @@ describe('DocDialogComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('should initialize textoAsociado correctly in ngOnInit', () => {
+    const mockData = { texto: 'Texto de prueba' };
+    component.ngOnInit();
+    expect(component.textoAsociado).toBeUndefined();
+  });
+  it('should close the dialog when closedModal is called', () => {
+    const dialogRefSpy = spyOn(component.dialogRef, 'close').and.callThrough();
+    component.closedModal();
+    expect(dialogRefSpy).toHaveBeenCalled();
+  });
+
 });
