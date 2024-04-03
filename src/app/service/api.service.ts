@@ -13,6 +13,8 @@ export class ApiService {
 
   apiUrl = 'https://container-app-gene-poc1.salmonriver-c4d5c0f1.francecentral.azurecontainerapps.io'
   apiUrlPoc2 = 'https://container-app-gene-poc2.salmonriver-c4d5c0f1.francecentral.azurecontainerapps.io'
+  apiUrlPoc1Electronica = 'https://container-app-gene-poc1.salmonriver-c4d5c0f1.francecentral.azurecontainerapps.io'
+
 
   constructor(private http:HttpClient) { }
 
@@ -39,10 +41,15 @@ export class ApiService {
 
   processMessageResolucion(formData: FormData): Observable<any> {
     //const myheaders = new HttpHeaders().append('Content-Type', 'multipart/form-data')
-
-
     // return this.http.post<string>(this.apiUrl + '/process_message', request,this._options);
     return this.http.post<any>(this.apiUrlPoc2 + '/process_message', formData);
+  }
+  processMessageSeuElectronica(message: string): Observable<string> {
+    const request = {
+      message:message
+    }
+    // return this.http.post<string>(this.apiUrl + '/process_message', request,this._options);
+    return this.http.post<string>(this.apiUrlPoc1Electronica + '/process_message', request);
 
   }
 

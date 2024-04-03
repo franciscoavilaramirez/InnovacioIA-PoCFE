@@ -1,19 +1,15 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { Message } from 'src/app/model/message';
-import { ApiService } from 'src/app/service/api.service';
-import * as responseData from 'src/app/response';
-import { PopoverComponent } from 'src/app/componentes/popover/popover.component';
 import { DocDialogComponent } from 'src/app/componentes/doc-dialog/doc-dialog.component';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { DomElementSchemaRegistry } from '@angular/compiler';
+import { ApiService } from 'src/app/service/api.service';
 
 @Component({
-  selector: 'app-poc1',
-  templateUrl: './poc1.component.html',
-  styleUrls: ['./poc1.component.scss']
+  selector: 'app-seu-electronica',
+  templateUrl: './seu-electronica.component.html',
+  styleUrls: ['./seu-electronica.component.scss']
 })
-export class Poc1Component implements OnInit {
+export class SeuElectronicaComponent implements OnInit {
 
   message:string = '¿Puedes darme algún ejemplo de base jurídica utilizada en las resoluciones de delitos leves de hurto?'
   selectedOption: any;
@@ -37,7 +33,7 @@ export class Poc1Component implements OnInit {
   }
 
   ngOnInit(): void {
-    this.selectedOption = 'poc1-buscador';
+    this.selectedOption = 'poc1-electronica';
     this.apiService.setSelectedOption(this.selectedOption);
   }
 
@@ -57,15 +53,15 @@ export class Poc1Component implements OnInit {
   // }
 
   onSelectionChange(selectedValue: string) {
-    if (selectedValue === 'poc2-analisis') {
+    if (selectedValue === 'poc1-buscador') {
+      this.router.navigate(['/poc1-buscador-universal']);
+    }else if(selectedValue === 'poc2-analisis'){
       this.router.navigate(['/poc2-analisis-documentos']);
-    }else if(selectedValue === 'poc1-electronica'){
-      this.router.navigate(['/poc1-seu-electronica']);
     }
   }
 
 	processMessage(message: string){
-   this.apiService.processMessage(this.message).subscribe(response => {
+   this.apiService.processMessageSeuElectronica(this.message).subscribe(response => {
     this.responseMessage = response;
     this.asignarTextosAReferencias();
     console.log('PRUEBA RESPONSE MESSAGE',this.responseMessage);
@@ -157,5 +153,4 @@ export class Poc1Component implements OnInit {
       dialog.afterClosed().subscribe( result => {
     });
   }
-
 }

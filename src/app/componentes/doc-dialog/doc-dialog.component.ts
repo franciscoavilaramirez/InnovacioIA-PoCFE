@@ -2,6 +2,9 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Poc1Component } from 'src/app/pages/poc1/poc1.component';
 
+
+
+
 @Component({
   selector: 'app-doc-dialog',
   templateUrl: './doc-dialog.component.html',

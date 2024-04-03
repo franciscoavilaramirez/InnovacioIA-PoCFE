@@ -22,13 +22,14 @@ export class Poc2Component implements OnInit {
   }
 
   ngOnInit(): void {
-    this.selectedOption = 'poc2';
+    this.selectedOption = 'poc2-analisis';
     this.apiService.setSelectedOption(this.selectedOption);
   }
 
   pocs = [
-    {value: 'poc1', viewValue: 'PoC 1: Buscador Universal'},
-    {value: 'poc2', viewValue: 'PoC 2: Análisis de documentos'},
+    {value: 'poc1-buscador', viewValue: 'PoC 1: Buscador Universal'},
+    {value: 'poc2-analisis', viewValue: 'PoC 2: Análisis de documentos'},
+    {value: 'poc1-electronica', viewValue: 'PoC 1: Seu Electrónica'},
 
   ];
   // onSelectionChange(selectedValue: string) {
@@ -40,8 +41,10 @@ export class Poc2Component implements OnInit {
   //   }
   // }
   onSelectionChange(selectedValue: string) {
-    if (selectedValue === 'poc1') {
-      this.router.navigate(['/poc1']);
+    if (selectedValue === 'poc1-buscador') {
+      this.router.navigate(['/poc1-buscador-universal']);
+    }else if(selectedValue === 'poc1-electronica'){
+      this.router.navigate(['/poc1-seu-electronica']);
     }
   }
 

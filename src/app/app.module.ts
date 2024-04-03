@@ -11,12 +11,12 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
 import { HttpClientModule } from '@angular/common/http';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import { PopoverComponent } from './componentes/popover/popover.component';
 import { DocDialogComponent } from './componentes/doc-dialog/doc-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from "@angular/material/form-field";
+import { SeuElectronicaComponent } from './pages/seu-electronica/seu-electronica.component';
 
 
 @NgModule({
@@ -24,8 +24,8 @@ import { MatFormFieldModule } from "@angular/material/form-field";
     AppComponent,
     Poc1Component,
     Poc2Component,
-    PopoverComponent,
-    DocDialogComponent
+    DocDialogComponent,
+    SeuElectronicaComponent
   ],
   imports: [
     BrowserModule,
@@ -44,4 +44,10 @@ import { MatFormFieldModule } from "@angular/material/form-field";
   providers: [],
   bootstrap: [AppComponent]
 })
+// @NgModule({
+//   imports: [
+//     MatDialogModule,
+//     // Otros módulos
+//   ],
+// })
 export class AppModule { }

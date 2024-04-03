@@ -1,23 +1,24 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClientModule } from '@angular/common/http';
-import { MatDialogModule } from '@angular/material/dialog';
-import { Poc1Component } from './poc1.component';
-import { RouterModule } from '@angular/router';
 
-describe('Poc1Component', () => {
-  let component: Poc1Component;
-  let fixture: ComponentFixture<Poc1Component>;
+import { SeuElectronicaComponent } from './seu-electronica.component';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
+import { MatDialogModule } from '@angular/material/dialog';
+
+describe('SeuElectronicaComponent', () => {
+  let component: SeuElectronicaComponent;
+  let fixture: ComponentFixture<SeuElectronicaComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ Poc1Component ],
+      declarations: [ SeuElectronicaComponent ],
       imports: [HttpClientModule,[RouterModule.forRoot([])],MatDialogModule],
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(Poc1Component);
+    fixture = TestBed.createComponent(SeuElectronicaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
