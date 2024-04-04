@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { Message } from 'src/app/model/message';
 import { ApiService } from 'src/app/service/api.service';
 import * as responseData from 'src/app/response';
-import { PopoverComponent } from 'src/app/componentes/popover/popover.component';
 import { DocDialogComponent } from 'src/app/componentes/doc-dialog/doc-dialog.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DomElementSchemaRegistry } from '@angular/compiler';

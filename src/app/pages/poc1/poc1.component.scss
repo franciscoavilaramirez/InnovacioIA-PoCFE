@@ -121,20 +121,25 @@
   }
 }
 
-.clickable {
-  cursor: pointer !important;
-  text-decoration: underline !important;
-  color: blue !important;
-}
-.mat-icon-button{
-  padding: 0;
-  min-width: 0;
-  width: 50px;
-  height: 50px;
-  flex-shrink: 0;
-  line-height: 40px;
-  border-radius: 50%;
-  color: blue !important;
-  /* display: flex; */
-  /* margin-right: 15px;*/
-}
+// .clickable {
+//   cursor: pointer !important;
+//   text-decoration: underline !important;
+//   color: blue !important;
+// }
+  .mat-icon-button{
+    padding: 0;
+    min-width: 0;
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0;
+    line-height: 40px;
+    border-radius: 50%;
+    color: blue;
+  }
+
+  .mat-icon-button:hover{
+    background-color: #e0e0e080;
+    color: #E20074;
+    transform: scale(1.1); /* Aplica una rotación de 10 grados */
+    transition: all 0.3s ease-in; /* Agrega una transición suave */
+  }
