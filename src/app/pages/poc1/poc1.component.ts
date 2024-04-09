@@ -2,10 +2,8 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
 import { Router } from '@angular/router';
 import { Message } from 'src/app/model/message';
 import { ApiService } from 'src/app/service/api.service';
-import * as responseData from 'src/app/response';
 import { DocDialogComponent } from 'src/app/componentes/doc-dialog/doc-dialog.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { DomElementSchemaRegistry } from '@angular/compiler';
 
 @Component({
   selector: 'app-poc1',
@@ -19,6 +17,7 @@ export class Poc1Component implements OnInit {
   referencias: string[] = ['[doc1]', '[doc2]', '[doc3]'];
   responseMessage: any = {};
   referenciasEncontradas: any = []
+  responseData: any = {};
 
   referenciasTextos: { [key: string]: string } = {
     // '[doc1]': 'Texto asociado a doc1',
@@ -38,7 +37,28 @@ export class Poc1Component implements OnInit {
   ngOnInit(): void {
     this.selectedOption = 'poc1-buscador';
     this.apiService.setSelectedOption(this.selectedOption);
+
+
+      // Intenta recuperar los datos del localStorage después de que la vista se haya inicializado
+      this.responseData = this.apiService.getDataFromLocalStorage('responseData');
+      console.log('varibale RESPONSEDATA', this.responseData)
+
+
+      // Si no hay datos en el localStorage, llama al servicio para obtener los datos
+      // if (!this.responseData) {
+      //   this.apiService.processMessage('¿Puedes darme algún ejemplo de base jurídica utilizada en las resoluciones de delitos leves de hurto?').subscribe(response => {
+      //     this.responseData = response;
+      //     this.apiService.storeDataInLocalStorage(response, 'responseData');
+
+      //     //console.log('varibale RESPONSE', response)
+      //     console.log('varibale RESPONSE', response)
+
+      //   });
+      // }
   }
+  limpiarLocalStorage(){
+    localStorage.clear();
+}
 
   pocs = [
     {value: 'poc1-buscador', viewValue: 'PoC 1: Buscador Universal'},
@@ -46,14 +66,6 @@ export class Poc1Component implements OnInit {
     {value: 'poc1-electronica', viewValue: 'PoC 1: Seu Electrónica'},
 
   ];
-  // onSelectionChange(selectedValue: string) {
-  //   this.selectedOption = selectedValue;
-  //   console.log('Valor selectedOption:', this.selectedOption);
-  //   //console.log('Valor selectedValue:', this.selectedOption);
-  //   if(selectedValue == "poc2"){
-  //     this.router.navigate(['/poc2']);
-  //   }
-  // }
 
   onSelectionChange(selectedValue: string) {
     if (selectedValue === 'poc2-analisis') {
@@ -63,27 +75,35 @@ export class Poc1Component implements OnInit {
     }
   }
 
-	processMessage(message: string){
-   this.apiService.processMessage(this.message).subscribe(response => {
-    this.responseMessage = response;
-    this.asignarTextosAReferencias();
-    console.log('PRUEBA RESPONSE MESSAGE',this.responseMessage);
-    this.buscarReferencias();
-   });
- }
+// 	processMessage(message: string){
+//    this.apiService.processMessage(this.message).subscribe(response => {
+//     this.responseMessage = response;
+//     this.asignarTextosAReferencias();
+//     console.log('PRUEBA RESPONSE MESSAGE',this.responseMessage);
+//     this.buscarReferencias();
+//    });
+//  }
+processMessage(message: string){
+  this.apiService.processMessage(this.message).subscribe(response => {
+   this.responseData = response;
+   this.asignarTextosAReferencias();
+   console.log('PRUEBA RESPONSE MESSAGE',this.responseData);
+   this.buscarReferencias();
+  });
+}
   asignarTextosAReferencias(): void {
-    if (this.responseMessage?.result?.citations) {
+    if (this.responseData?.result?.citations) {
       // Comprueba si hay al menos una referencia en el array de citas
-      if (this.responseMessage.result.citations.length > 0) {
+      if (this.responseData.result.citations.length > 0) {
         // Asigna el texto asociado a la primera referencia a `[doc1]`
-        this.referenciasTextos['[doc1]'] = this.responseMessage.result.citations[0].content;
-        this.filepath['[doc1]'] = this.responseMessage.result.citations[0].filepath;
+        this.referenciasTextos['[doc1]'] = this.responseData.result.citations[0].content;
+        this.filepath['[doc1]'] = this.responseData.result.citations[0].filepath;
 
-        this.referenciasTextos['[doc2]'] = this.responseMessage.result.citations[1].content;
-        this.filepath['[doc2]'] = this.responseMessage.result.citations[1].filepath;
+        this.referenciasTextos['[doc2]'] = this.responseData.result.citations[1].content;
+        this.filepath['[doc2]'] = this.responseData.result.citations[1].filepath;
 
-        this.referenciasTextos['[doc3]'] = this.responseMessage.result.citations[2].content;
-        this.filepath['[doc3]'] = this.responseMessage.result.citations[2].filepath;
+        this.referenciasTextos['[doc3]'] = this.responseData.result.citations[2].content;
+        this.filepath['[doc3]'] = this.responseData.result.citations[2].filepath;
 
       }
     }
@@ -95,7 +115,7 @@ export class Poc1Component implements OnInit {
   }
 
   buscarReferencias(): void {
-    const texto = this.responseMessage.result.answer;
+    const texto = this.responseData.result.answer;
     const patronParrafos = /\n\n+/; // Este es solo un ejemplo de patrón para separar párrafos por saltos de línea
     const parrafos = texto.split(patronParrafos);
 

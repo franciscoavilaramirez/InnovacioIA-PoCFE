@@ -22,7 +22,7 @@
       </div>
 
       <!-- AÑADE LAS REFERENCIAS AL FINAL DEL TEXTO PRINCIPAL Y LAS HACE CLICABLES -->
-      <div class="bocadillo-izq">
+      <div class="bocadillo-izq"  >
         <ng-container *ngFor="let segmentosParrafo of referenciasEncontradas">
     <p>
       <ng-container *ngFor="let segmento of segmentosParrafo">
@@ -46,6 +46,9 @@
          <img src = "../../assets/arrow-green.png" alt="" style="width: 40px; height: 40px;">
         </button>
       </div>
+    </div>
+    <div class="div">
+      <p>{{this.responseData.result.answer}}</p>
     </div>
   </div>
 </div>

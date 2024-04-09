@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ThemePalette } from '@angular/material/core';
+import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/service/api.service';
@@ -16,6 +18,10 @@ export class Poc2Component implements OnInit {
   responseMessage: any = {};
   formData = new FormData();
   hiddenResponse = false;
+  color: ThemePalette = 'accent';
+  mode: ProgressSpinnerMode = 'indeterminate';
+  value = 50;
+  spinner: boolean = false;
 
   constructor(private router: Router, private apiService: ApiService,private _snackBar: MatSnackBar) {
     //this.selectedOption = this.pocs[0].value;
@@ -93,8 +99,11 @@ export class Poc2Component implements OnInit {
 
     if(this.selectedTipo === 'resolucion'){
       this.formData.append('tipo',this.selectedTipo);
+      this.spinner = true;
      this.apiService.processMessageResolucion(this.formData).subscribe(response => {
+
       if(this.responseMessage){
+        this.spinner = false;
         this.responseMessage = response;
         //console.log('HAS SELECCIONADO RESOLUCION',this.responseMessage);
         this.hiddenResponse = true

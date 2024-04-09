@@ -30,14 +30,24 @@ export class ApiService {
     return this.http.post<string>(this.apiUrl + '/process_message', request);
 
   }
-  private _options = {
-      headers: new HttpHeaders(
-    {
-      'Content-Type': 'multipart/form-data','accept':'aplication/json',
-      //'Access-Control-Allow-Origin': '*',
-     // 'Access-Control-Allow-Headers':'Content-Type,Access-Control-Allow-Headers,Authorization,X-Requested-With'
-    })
+  // Almacenar datos en localStorage
+  storeDataInLocalStorage(data: any, key: string) {
+    localStorage.setItem(key, JSON.stringify(data));
   }
+
+  // Recuperar datos de localStorage
+  getDataFromLocalStorage(key: string): any {
+    const data = localStorage.getItem(key);
+    return data ? JSON.parse(data) : null;
+  }
+  // private _options = {
+  //     headers: new HttpHeaders(
+  //   {
+  //     'Content-Type': 'multipart/form-data','accept':'aplication/json',
+  //     'Access-Control-Allow-Origin': '*',
+  //     'Access-Control-Allow-Headers':'Content-Type,Access-Control-Allow-Headers,Authorization,X-Requested-With'
+  //   })
+  // }
 
   processMessageResolucion(formData: FormData): Observable<any> {
     //const myheaders = new HttpHeaders().append('Content-Type', 'multipart/form-data')

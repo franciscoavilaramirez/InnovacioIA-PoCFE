@@ -41,8 +41,17 @@
             </div>
           </div>
           <div class="procesar">
-            <button mat-raised-button color="primary" [disabled]="!(selectedTipo !== 'ninguna' && selectedFile)" (click)="processMessageResolucion(responseMessage)" >Procesar Documento</button>
-          </div>
+            <button mat-raised-button color="primary" [disabled]="!(selectedTipo !== 'ninguna' && selectedFile)" (click)="processMessageResolucion(responseMessage)">
+              Procesar Documento
+            </button>
+            <mat-progress-spinner
+                *ngIf="spinner"
+                class="example-margin"
+                [color]="color"
+                [mode]="mode"
+                [value]="value">
+            </mat-progress-spinner>
+            </div>
         </div>
   </div>
 </div>

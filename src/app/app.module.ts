@@ -17,6 +17,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { SeuElectronicaComponent } from './pages/seu-electronica/seu-electronica.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -39,15 +40,11 @@ import { SeuElectronicaComponent } from './pages/seu-electronica/seu-electronica
     MatDialogModule,
     MatSnackBarModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-// @NgModule({
-//   imports: [
-//     MatDialogModule,
-//     // Otros módulos
-//   ],
-// })
+
 export class AppModule { }
